@@ -31,7 +31,6 @@ namespace DeveloperTest.Database
                 {
                     JobId = 1,
                     Engineer = "Test",
-                    CustomerId = 1,
                     When = DateTime.Now
                 });
             

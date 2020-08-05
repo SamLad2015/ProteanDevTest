@@ -14,7 +14,7 @@ namespace DeveloperTest.Migrations
                     JobId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Engineer = table.Column<string>(nullable: true),
-                    CustomerId =  table.Column<int>(nullable: false),
+                    CustomerId = table.Column<int>(nullable: true),
                     When = table.Column<DateTime>(nullable: false)
                 },
                 constraints: table =>
@@ -24,8 +24,8 @@ namespace DeveloperTest.Migrations
             
             migrationBuilder.InsertData(
                 table: "Jobs",
-                columns: new[] { "JobId", "Engineer", "CustomerId", "When" },
-                values: new object[] { 1, "Test", 1, new DateTime(2020, 2, 19, 14, 14, 16, 317, DateTimeKind.Local).AddTicks(2552) });
+                columns: new[] { "JobId", "Engineer", "When" },
+                values: new object[] { 1, "Test", new DateTime(2020, 2, 19, 14, 14, 16, 317, DateTimeKind.Local).AddTicks(2552) });
 
             migrationBuilder.CreateTable(
                 name: "CustomerTypes",

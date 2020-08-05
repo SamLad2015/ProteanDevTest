@@ -24,6 +24,7 @@ export class JobComponent implements OnInit {
     engineer: null,
     customerId: null,
     customer: null,
+    customerType: null,
     when: null
   };
 

@@ -7,7 +7,7 @@ namespace DeveloperTest.Database.Models
         public int JobId { get; set; }
 
         public string Engineer { get; set; }
-        public int CustomerId { get; set; }
+        public int? CustomerId { get; set; }
 
         public DateTime When { get; set; }
     }

@@ -17,34 +17,36 @@ namespace DeveloperTest.Business
 
         public JobModel[] GetJobs()
         {
-            return context.Jobs
-                .Join(context.Customers, 
-                    job => job.CustomerId,
-                    customer => customer.CustomerId,
-                    (j, c) => new JobModel
-                    {
-                        JobId = j.JobId,
-                        Engineer = j.Engineer,
-                        Customer = c.Name,
-                        When = j.When
-                    }
-                ).ToArray();
+            return (from j in context.Jobs
+                join c in context.Customers 
+                    on j.CustomerId equals c.CustomerId into cJoin
+                from cj in cJoin.DefaultIfEmpty()
+                select new JobModel
+                {
+                    JobId = j.JobId,
+                    Engineer = j.Engineer,
+                    Customer = j.CustomerId.HasValue ? cj.Name : "Unknown",
+                    When = j.When
+                }).ToArray();
         }
 
         public JobModel GetJob(int jobId)
         {
-            return context.Jobs
-                .Join(context.Customers, 
-                    job => job.CustomerId,
-                    customer => customer.CustomerId,
-                    (j, c) => new JobModel
-                    {
-                        JobId = j.JobId,
-                        Engineer = j.Engineer,
-                        Customer = c.Name,
-                        When = j.When
-                    }
-                ).SingleOrDefault(j => j.JobId == jobId);
+            return (from j in context.Jobs
+                join c in context.Customers 
+                    on j.CustomerId equals c.CustomerId into cJoin
+                from cj in cJoin.DefaultIfEmpty()
+                join t in context.CustomerTypes
+                    on cj.CustomerTypeId equals t.CustomerTypeId into ctJoin
+                from cjt in ctJoin.DefaultIfEmpty()
+                select new JobModel
+                {
+                    JobId = j.JobId,
+                    Engineer = j.Engineer,
+                    Customer = j.CustomerId.HasValue ? cj.Name : "Unknown",
+                    CustomerType = cjt.Description,
+                    When = j.When
+                }).SingleOrDefault(j => j.JobId == jobId);
         }
 
         public JobModel CreateJob(BaseJobModel model)
