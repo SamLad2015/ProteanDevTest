@@ -40,6 +40,6 @@ Please consider the following Steps:
 
 1. Please run the down script to clear the existing tables and recreate them
 2. Rebuild and start the api project
-3. I has to change the devkit version for my set up for some reason so please use your version if front end builds fine else run npm install 
+3. I had to change the devkit version for my set up for some reason so please use your version if front end builds fine else run npm install 
 4. run ng serve to start the app
    
