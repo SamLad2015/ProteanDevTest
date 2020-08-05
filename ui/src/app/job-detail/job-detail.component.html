@@ -1,0 +1,9 @@
+<div *ngIf="job" class="contents">
+  <p>JobId: {{job.jobId}}</p>
+  <p>Engineer: {{job.engineer}}</p>
+  <p>Customer: {{job.customer}}</p>
+  <p>When: {{job.when | date:'shortDate'}}</p>
+
+  <a [routerLink]="['/jobs']">Back</a>
+</div>
+
